@@ -1,0 +1,12 @@
+{% extends 'student/base.html' %}
+{% block title %}{% endblock %}
+
+{% block content %}
+    <input type="hidden" name="id" value="{{ delect_student.id }}">
+    <h1 class="info">确定要删除学生{{ delect_student.name }}</h1>
+    <ul class="delete_student">
+        <h4 class="info"><a href="/student/do_delect/?no={{ delect_student.no }}"><button type="submit" class="btn btn-danger">确定</button></a></h4>
+        <h4 class="info"><a href="/student/index/"><button type="submit" class="btn btn-success">返回</button></a></h4>
+    </ul>
+{% endblock %}
+

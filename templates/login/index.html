@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+    <h1>首页  欢迎xx用户回来</h1>
+    <div name="nav">
+        <ul>
+            {% if request.session.is_login %}
+                <a><li>我的</li></a>
+                <li>欢迎，{{ request.session.username }}</li>
+            {% else %}
+                <a href="/login/login/">去登录</a>
+                <a href="/login/register/">去注册</a>
+            {% endif %}
+        </ul>
+    </div>
+</body>
+</html>

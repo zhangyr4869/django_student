@@ -1,0 +1,14 @@
+{% extends 'student/base.html' %}
+{% block title %}{% endblock %}
+
+{% block content %}
+    <form><input name="name">
+        {% csrf_token %}
+        <select name="gender" class="stu_gender">
+            <option value="0">未选择</option>
+            <option value="1">男</option>
+            <option value="2">女</option>
+            <option value="3">保密</option>
+        </select><button type="submit">确定</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'student/base.html' %}
+{% block title %}{% endblock %}
+
+{% block content %}
+    <form action="/student/update/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" name="id" value="{{ student.id }}">
+        <h1 class="info">修改学生(student)</h1>
+        <table class="table">
+            <tr class="form-group">
+                <td><lable>学号:</lable><input type="text" name="no" class="form-control form-text" required value="{{ student.no }}"></td>
+            </tr>
+            <tr class="form-group">
+                <td><lable>姓名:</lable><input type="text" name="name" class="form-control form-text" required value="{{ student.name }}"></td>
+            </tr>
+            <tr class="form-group">
+                <td><lable>年龄:</lable><input type="text" name="age" class="form-control form-text" required value="{{ student.age }}"></td>
+            </tr>
+            <tr class="form-group">
+                <td><lable>性别:</lable>
+                    <select name="gender" class="stu_gender">
+                        <option value="0">未选择</option>
+                        <option value="1">男</option>
+                        <option value="2">女</option>
+                        <option value="3">保密</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="form-group">
+                <td><lable>电话号码:</lable><input type="text" name="phone" class="form-control form-text" required value="{{ student.phone }}"></td>
+            </tr>
+            <tr class="form-group">
+                <td><lable>头像:</lable><input type="file" name="avatar" class="form-control form-text" required value="media/{{ student.avatar }}"></td>
+            </tr>
+        </table>
+        <div class="form-group"><button type="submit" name="avatar" class="btn btn-primary" required>提交</button></div>
+    </form>
+{% endblock %}
+

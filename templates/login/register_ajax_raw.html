@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册页</title>
+</head>
+<body>
+    <!--错误  login/register/   会在当前页面url后继续补
+        正确写法  /login/register/
+        ip: port开始   /-->
+    <form action="/login/register/" id="register-form" method="post">
+            {% csrf_token %}
+            用户名：<input id="form-name" type="text" name="name"><br>
+            密码：<input type="password" name="password"><br>
+            邮箱：<input type="text" name="email"><br>
+            备注：<input type="text" name="note"><br>
+            爱好：<input type="text" name="hobby"><br>
+            <button type="submit">注册</button>
+{#        <button type="submit" onchange="javascript:aaa()">注册</button>#}
+    </form><br>
+
+    <h3 id="error_message" style="color: red;">{{ error_message }}</h3>
+
+    <script>
+        formName=document.getElementById('form-name')
+        console.log(formName)
+        // onchange 表单输出框内容变化并失去焦点focus是触发。  onblur失去焦点。onfucus获得焦点。
+        formName.onchange = function () {
+            // js发送http异步请求，xhr
+            var xhr = new XMLHttpRequest()
+            // 跨域问题   协议和路由必须补全
+            xhr.open('post','http://127.0.0.1:8000/login/register_check/')
+            // 添加请求头，编码表单中的中文参数  如果不写这句话,接受不到form表单
+            xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
+            // 发送请求头和传表单参数
+            xhr.send('name=张')
+
+            // xhr请求状态   0未初始化； 1正在加载； 2已加载； 3交互中； 4完成
+            xhr.onreadystatechange=function () {
+                console.log(xhr)
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    console.log(xhr.responseText)
+                    respText=xhr.responseText
+                    // json字符串转成js对象
+                    resp_obj=JSON.parse(respText)
+                    console.log(resp_obj)
+                    error_message=resp_obj.error_message
+                    console.log(error_message)
+                    document.getElementById('error_message').innerHTML=error_message
+
+                }
+            }
+
+        }
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
